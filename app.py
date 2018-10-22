@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 init_api_routes(app, session)
 
-app.config['SECRET_KEY'] = 'Hello from team Hufflepuff :D'
+app.config['SECRET_KEY'] = 'Hello from Krishna Karanam'
 CORS(app)
 
 if __name__ == '__main__':
