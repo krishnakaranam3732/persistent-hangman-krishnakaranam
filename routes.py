@@ -54,6 +54,17 @@ def init_api_routes(app, session):
                         session.add(new_player)
                         session.commit()
                         return session.query(Player).filter_by(username=username).first().serialize(), 200
+                
+                @players_api.response(200, 'Success')
+                @players_api.response(404, 'Not Found')
+                @players_api.doc(params={'player_id': 'The player_id of the ' +
+                                         'player'})
+                def get(self, player_id):
+                        '''Gets a player'''
+                        player = session.query(Player).filter_by(player_id=player_id).first()
+                        if player:
+                                return player.serialize(), 200
+                        return "Player Does not exist", 404
 
         @players_api.route('/<int:player_id>/games/start')
         class CreateGame(Resource):
