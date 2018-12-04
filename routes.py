@@ -171,4 +171,4 @@ def init_api_routes(app, session):
                 def get(self, game_id):
                         '''Guesses a game for a player'''
                         game = session.query(Game).filter_by(game_id=game_id).first()
-                        return game.serialize, 200
+                        return game.serialize(), 200
