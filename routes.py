@@ -161,3 +161,14 @@ def init_api_routes(app, session):
                         del result['word_id']
 
                         return result, status
+
+        @game_api.route('/<int:game_id>')
+        class GetGame(Resource):
+                @game_api.response(200, 'Success')
+                @game_api.response(404, 'Not Found')
+                @game_api.response(400, 'Bad Request')
+                @game_api.doc(params={'game_id': 'The game_id of the game'})
+                def get(self, game_id):
+                        '''Guesses a game for a player'''
+                        game = session.query(Game).filter_by(game_id=game_id).first()
+                        return game.serialize, 200
